@@ -46,5 +46,11 @@ public class Main {
         System.out.println(main.controller.getPeople());
 
         System.out.println(main.controller.getPeople().get(0).getName());
+
+        main.controller.saveCsv();
+
+        main.controller.loadCsv();
+
+        System.out.println(main.controller.getPeople());
     }
 }

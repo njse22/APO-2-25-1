@@ -7,6 +7,7 @@ import exceptions.PersonRuntimeException;
 
 import java.io.File;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class Controller {
 
     private Path dataFolder;
     private Path dataJson;
-
+    private Path dataCsv;
 
     public Controller() {
 
@@ -29,6 +30,7 @@ public class Controller {
         System.out.println("Data Project: "+dataProject);
         dataFolder = dataProject.resolve(dataProject+"/src/main/data");
         dataJson = dataFolder.resolve("people.json");
+        dataCsv = dataFolder.resolve("people.csv");
 
         people = new ArrayList<>();
         data = new File("lista.json");
@@ -40,28 +42,71 @@ public class Controller {
             if(!Files.exists(dataJson)){
                 Files.createFile(dataJson);
             }
+            if(!Files.exists(dataCsv)){
+                Files.createFile(dataCsv);
+            }
+        }
+    }
+
+    public void saveCsv(){
+        try {
+            inicialize();
+            // Formato -> CSV
+            String csvContent = "";
+            for (Person person: people){
+                csvContent += person.getName() + "," + person.getAge() + "\n";
+            }
+
+            // Guardar / Escribir
+            Files.writeString(dataCsv, csvContent);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     public void saveJson(){
         try {
+            // Iniciar los recursos
             inicialize();
+
+            // Dar un formato de archivo
             Gson gson = new Gson();
             String jsonData = gson.toJson(people);
+
+            // Guardar la información
             Files.writeString(dataJson, jsonData);
         } catch (IOException e) {
             System.out.println("No se pudo crear la carpeta o archivo");
         }
     }
 
+    public void loadCsv(){
+        try {
+            List<String> csvData = Files.readAllLines(dataCsv, StandardCharsets.UTF_8);
+            // System.out.println("Controller::loadCsv >>>" +csvData);
+
+            for(String line: csvData){
+                String[] params = line.split(",");
+                System.out.println("Controller::loadCsv >>>");
+                Person person = new Person(params[0], Integer.parseInt(params[1]));
+                people.add(person);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void loadJson(){
         try {
+
+            // Cargamos / leemos la información
             String jsonData = Files.readString(dataJson);
-            System.out.println("DATA :: "+jsonData);
+            //System.out.println("DATA :: "+jsonData);
+
+            // Lo cargamos a un Objeto de Java
             Gson gson = new Gson();
-
             Type peopleArray = new TypeToken<ArrayList<Person>>(){}.getType();
-
             people = gson.fromJson(jsonData, peopleArray);
         } catch (IOException e) {
 
