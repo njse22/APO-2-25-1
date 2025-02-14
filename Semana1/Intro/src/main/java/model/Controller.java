@@ -54,7 +54,8 @@ public class Controller {
             // Formato -> CSV
             String csvContent = "";
             for (Person person: people){
-                csvContent += person.getName() + "," + person.getAge() + "\n";
+                csvContent += person.getName() + "," + person.getAge()
+                        + "," + person.getHeight() + "," + person.getWeight() + "\n";
             }
 
             // Guardar / Escribir
@@ -89,7 +90,9 @@ public class Controller {
             for(String line: csvData){
                 String[] params = line.split(",");
                 System.out.println("Controller::loadCsv >>>");
-                Person person = new Person(params[0], Integer.parseInt(params[1]));
+                Person person = new Person(params[0], Integer.parseInt(params[1]),
+                        Double.parseDouble(params[2]), Double.parseDouble(params[3]));
+
                 people.add(person);
             }
         } catch (IOException e) {
@@ -122,15 +125,25 @@ public class Controller {
         this.people = people;
     }
 
-    public void addPerson(String name, int age) throws PersonAllReadyExist{
-        Person person = new Person(name, age);
+    public void addPerson(String name, int age, double height, double weight) throws PersonAllReadyExist{
+        Person person = new Person(name, age, height, weight);
 
-        if(people.contains(person)){
+        if(isInList(person)){
             throw new PersonAllReadyExist("La persona ya ha sido creada");
         }
         else {
             people.add(person);
         }
+    }
+
+    public boolean isInList(Person person){
+        boolean found = false;
+        for(int i = 0; i< people.size() && !found; i++){
+            if(people.get(i).getName().equals(person.getName())){
+                found = true;
+            }
+        }
+        return found;
     }
 
     public String fileProperties(){

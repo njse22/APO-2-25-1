@@ -2,6 +2,7 @@ package ui;
 
 import exceptions.PersonAllReadyExist;
 import model.Controller;
+import model.Person;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,18 +22,19 @@ public class Main {
         Main main = new Main();
 
         try {
-            main.controller.addPerson("Name1", 10);
-            main.controller.addPerson("Name2", 20);
-            main.controller.addPerson("Name3", 30);
-            main.controller.addPerson("Name4", 40);
-            main.controller.addPerson("Name5", 50);
-            main.controller.addPerson("Name5", 50);
+            main.controller.addPerson("Name1", 10, 1.70, 70 );
+            main.controller.addPerson("Name2", 20, 1.70, 70 );
+            main.controller.addPerson("Name3", 30, 1.70, 70 );
+            main.controller.addPerson("Name4", 40, 1.70, 70 );
+            main.controller.addPerson("Name5", 50, 1.70, 70 );
+            main.controller.addPerson("Name5", 50, 1.70, 70 );
         } catch (PersonAllReadyExist error){
             Logger logger = Logger.getLogger(Main.class.getName());
             logger.log(Level.SEVERE, error.getMessage());
             // error.printStackTrace();
         }
 
+        main.controller.isInList(new Person("Name1", 10, 1.70, 70 ));
 
         System.out.println(main.controller.getJsonData());
 
