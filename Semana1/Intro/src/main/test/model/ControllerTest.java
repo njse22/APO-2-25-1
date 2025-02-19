@@ -91,7 +91,7 @@ public class ControllerTest {
 
     @Test
     void testInList(){
-        // init 
+        // init
         listWithElements();
 
         // Act
