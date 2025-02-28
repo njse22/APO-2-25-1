@@ -42,6 +42,7 @@ public class Person implements Comparable<Person> {
     public String toString() {
         return "Person{" +
                 " age=" + age +
+                " cc=" + cc +
                 '}';
     }
 

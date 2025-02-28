@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class PersonController {
@@ -13,6 +14,23 @@ public class PersonController {
 
     public ArrayList<Person> getPeople() {
         return people;
+    }
+
+    public ArrayList<Person> selectionSort(ArrayList<Person> toSort, Comparator<Person> comparator){
+        int n = toSort.size();
+
+        for(int i=0; i< n-1; i++){
+            for (int j = i+1; j < n; j++) {
+                if(comparator.compare(toSort.get(i), toSort.get(j)) > 0){
+                    Person prev = toSort.get(i);
+                    Person current = toSort.get(j);
+
+                    toSort.set(i, current);
+                    toSort.set(j, prev);
+                }
+            }
+        }
+        return toSort;
     }
 
     public ArrayList<Person> selectionSort(ArrayList<Person> toSort){

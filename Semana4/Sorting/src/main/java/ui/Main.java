@@ -4,13 +4,17 @@ import model.Person;
 import model.PersonComparator;
 import model.PersonController;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class Main {
     public static void main(String[] args) {
-        Person p1 = new Person("Person 1", 5, "A1");
+        Person p1 = new Person("Person 1", 5, "A5");
         Person p2 = new Person("Person 2", 2, "A2");
         Person p3 = new Person("Person 3", 4, "A3");
-        Person p4 = new Person("Person 3", 1, "A3");
-        Person p5 = new Person("Person 3", 3, "A3");
+        Person p4 = new Person("Person 3", 1, "A4");
+        Person p5 = new Person("Person 5", 3, "A5");
 
         // Person p1 < Person p2
         System.out.println(p1.compareTo(p2));
@@ -34,7 +38,19 @@ public class Main {
         System.out.println(controller.getPeople());
 
         // System.out.println(controller.selectionSort(controller.getPeople()));
-        System.out.println(controller.insertionSort(controller.getPeople()));
+        // System.out.println(controller.insertionSort(controller.getPeople()));
+
+        // Collections.sort(controller.getPeople());
+        // System.out.println(controller.getPeople());
+
+        //Collections.sort(controller.getPeople(), comparatorCc);
+        //System.out.println(controller.getPeople());
+
+
+        Comparator copareInt = Comparator.comparingInt(Person::getAge);
+
+        System.out.println(controller.selectionSort(controller.getPeople(), copareInt));
+
 
     }
 }
