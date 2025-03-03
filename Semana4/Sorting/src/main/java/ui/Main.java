@@ -47,7 +47,13 @@ public class Main {
         //System.out.println(controller.getPeople());
 
 
-        Comparator copareInt = Comparator.comparingInt(Person::getAge);
+        Comparator<Person> copareInt = Comparator.comparingInt(Person::getAge);
+
+        Comparator<Person> comp = (o1, o2) -> {
+            return o2.getName().compareTo(o1.getName());
+        };
+
+        controller.selectionSort(controller.getPeople(), comp);
 
         System.out.println(controller.selectionSort(controller.getPeople(), copareInt));
 
