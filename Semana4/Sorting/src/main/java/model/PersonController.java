@@ -66,4 +66,67 @@ public class PersonController {
         return toSort;
     }
 
+
+    public Person binarySearch(ArrayList<Person> toSearch, String name, Comparator<String> comparator){
+
+        Person found = null;
+
+        int start = 0;
+        int end = toSearch.size() -1;
+        int mid = (start + end)/2;
+
+        while(found == null && start <= end){
+
+            // 1. CASO BASE = El elemento buscado esta en el centro.
+            if ( comparator.compare(toSearch.get(mid).getName(), name) == 0){
+                found = toSearch.get(mid);
+            }
+
+            // 2. CASO BASE = El elemento buscado es mayor que el elemento del centro
+            else if( toSearch.get(mid).getName().compareTo(name) < 0){
+                start = mid+1;
+            }
+
+            // 3. CASO BASE = El elemento buscado es menor que el elemento del centro
+            else if(toSearch.get(mid).getName().compareTo(name) > 0){
+                end = mid-1;
+            }
+
+            mid = (start + end)/2;
+        }
+
+        return found;
+    }
+
+    public Person binarySearch(ArrayList<Person> toSearch, String name){
+
+        Person found = null;
+
+        int start = 0;
+        int end = toSearch.size() -1;
+        int mid = (start + end)/2;
+
+        while(found == null && start <= end){
+
+            // 1. CASO BASE = El elemento buscado esta en el centro.
+            if (toSearch.get(mid).getName().compareTo(name) == 0){
+                found = toSearch.get(mid);
+            }
+
+            // 2. CASO BASE = El elemento buscado es mayor que el elemento del centro
+            else if( toSearch.get(mid).getName().compareTo(name) < 0){
+                start = mid+1;
+            }
+
+            // 3. CASO BASE = El elemento buscado es menor que el elemento del centro
+            else if(toSearch.get(mid).getName().compareTo(name) > 0){
+                end = mid-1;
+            }
+
+            mid = (start + end)/2;
+        }
+
+        return found;
+    }
+
 }
