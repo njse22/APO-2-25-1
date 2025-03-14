@@ -8,6 +8,36 @@ public class SimpleList {
         first = null;
     }
 
+    public boolean delete(String data){
+        boolean isDeleted = false;
+        Node current = first;
+
+        // Caso base : Lista NO vacia
+        if (first != null){
+            // Caso Base -> El nodo a eliminar es el firts
+            if(first.getData().compareTo(data) == 0){
+                first = first.getNext();
+                current.setNext(null);
+                isDeleted = true;
+            }
+            // Caso base -> El nodo a eliminar es diferente del first
+            else {
+
+                // Caso iterativo
+                while (current.getNext() != null && current.getNext().getData().compareTo(data) != 0){
+                    current = current.getNext();
+                }
+                if (current.getNext() != null){
+                    Node toDelete = current.getNext();
+                    current.setNext(toDelete.getNext());
+                    toDelete.setNext(null);
+                    isDeleted = true;
+                }
+            }
+        }
+        return isDeleted;
+    }
+
     public boolean add(String data){
         // Crear el Node a agregar
         Node node = new Node(data);

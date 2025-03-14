@@ -19,5 +19,16 @@ public class Main {
 
         System.out.println(list.getByIndex(6));
 
+        System.out.println("**************************************************************");
+
+        // Caso 1:
+        list.delete("A1");
+        System.out.println(list.getFirst());
+
+        list.delete("A3");
+        System.out.println(list.getFirst().getNext());
+
+        list.delete("A6");
+
     }
 }
