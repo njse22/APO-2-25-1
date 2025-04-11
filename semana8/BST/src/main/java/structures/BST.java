@@ -166,6 +166,24 @@ public class BST<T extends Comparable<T> > {
         return current;
     }
 
-    // get min
+    // Recorrido in Order
+    public String inOrder(){
+        String msg = "";
+        if(root != null){
+            msg = inOrder(root);
+        }else {
+            msg = "is empty tree";
+        }
+        return msg;
+    }
+
+    private String inOrder(Node<T> current){
+        if(current != null){
+            return inOrder(current.getLeft()) + current.getValue() + inOrder(current.getRight());
+        }
+        else {
+            return " ";
+        }
+    }
 
 }
