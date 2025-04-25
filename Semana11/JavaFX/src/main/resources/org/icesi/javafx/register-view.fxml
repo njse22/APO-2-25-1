@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="org.icesi.javafx.control.RegisterController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label text="Nombre: " />
+    <!-- <TextField fx:id="textFieldName" /> -->
+    <TextField fx:id="nameTextFiled" />
+    <Label text="Código: " />
+    <TextField fx:id="codeTextFiled" />
+
+    <Label text="Edad: " />
+    <TextField fx:id="yearsTextFiled" />
+
+    <Button onAction="#onRegisterEstudent" text="Agregar Estudiante" />
+   <Label fx:id="listStudentsLabel" prefHeight="120.0" prefWidth="160.0" text="Lista de Uuariosl" />
+
+
+
+</VBox>
