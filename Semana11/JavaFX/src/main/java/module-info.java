@@ -7,4 +7,8 @@ module org.icesi.javafx {
     exports org.icesi.javafx;
     exports org.icesi.javafx.control;
     opens org.icesi.javafx.control to javafx.fxml;
+
+    exports org.icesi.javafx.model;
+    opens org.icesi.javafx.model to javafx.fxml;
+
 }

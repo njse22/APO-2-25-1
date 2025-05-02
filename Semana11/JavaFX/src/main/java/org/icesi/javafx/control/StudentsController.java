@@ -1,16 +1,28 @@
 package org.icesi.javafx.control;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.icesi.javafx.model.Student;
 
 import java.util.ArrayList;
 
 public class StudentsController {
 
+    // Referencia a si mismo
+    private static StudentsController instance;
 
-    private ArrayList<Student> students;
+    private ObservableList<Student> students;
 
-    public StudentsController() {
-        students = new ArrayList<>();
+    // Constructor privado
+    private StudentsController() {
+        students = FXCollections.observableArrayList();
+    }
+
+    public static StudentsController getInstance(){
+        if(instance == null){
+            instance = new StudentsController();
+        }
+        return instance;
     }
 
     public void addStudent(String name, String code, int years){
@@ -19,11 +31,11 @@ public class StudentsController {
 
     }
 
-    public ArrayList<Student> getStudents() {
+    public ObservableList<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(ArrayList<Student> students) {
+    public void setStudents(ObservableList<Student> students) {
         this.students = students;
     }
 
