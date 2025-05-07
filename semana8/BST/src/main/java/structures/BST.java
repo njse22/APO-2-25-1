@@ -1,5 +1,7 @@
 package structures;
 
+import java.util.Comparator;
+
 public class BST<T extends Comparable<T> > {
 
     private Node<T> root;
@@ -41,6 +43,32 @@ public class BST<T extends Comparable<T> > {
             if(current.getRight() == null)
                 current.setRight(node);
             // CASO BASE 2.2: La derecha no esta vacia
+            else {
+                add(node, current.getRight());
+            }
+        }
+    }
+
+    // Método recursivo --> Monitoria 
+    private void add(Node<T> node, Node<T> current, Comparator<Node<T>> comparator){
+
+        // CASO BASE 1: el nodo ha a gregar es menor que el current
+        if(comparator.compare(current, node) > 0){
+
+       // if (current.getValue().compareTo(node.getValue()) > 0){
+            // CASO BASE 1.1: La izquierda del nodo current esta vacia
+            if(current.getLeft() == null)
+                current.setLeft(node);
+                // CASO BASE 1.2: La izquierda no esta vacia
+            else
+                add(node, current.getLeft());
+        }
+        // CASO BASE 2: el nodo ha a gregar es mayor que el current
+        else if (current.getValue().compareTo(node.getValue()) < 0){
+            // CASO BASE 2.1: La derecha del nodo current esta vacia
+            if(current.getRight() == null)
+                current.setRight(node);
+                // CASO BASE 2.2: La derecha no esta vacia
             else {
                 add(node, current.getRight());
             }
@@ -183,6 +211,46 @@ public class BST<T extends Comparable<T> > {
         }
         else {
             return " ";
+        }
+    }
+
+
+    // Recorrido in Order
+    public String preOrder(){
+        String msg = "";
+        if(root != null){
+            msg = preOrder(root);
+        }else {
+            msg = "is empty tree";
+        }
+        return msg;
+    }
+
+    private String preOrder(Node<T> current){
+        if(current != null){
+            return current.getValue() + " " + preOrder(current.getLeft()) + " " + preOrder(current.getRight());
+        }
+        else {
+            return "";
+        }
+    }
+
+    public String postOrder(){
+        String msg = "";
+        if(root != null){
+            msg = postOrder(root);
+        }else {
+            msg = "is empty tree";
+        }
+        return msg;
+    }
+
+    private String postOrder(Node<T> current){
+        if(current != null){
+            return postOrder(current.getLeft()) + " " + postOrder(current.getRight()) + " " + current.getValue();
+        }
+        else {
+            return "";
         }
     }
 
