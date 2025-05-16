@@ -41,7 +41,7 @@ public class HelloController implements Initializable {
 
         Action1 a1 = new Action1();
 
-        e3 = new Element3(canvas, Color.GREEN, 500, 0, 0, 50, 50, a1 );
+        e3 = new Element3(canvas, Color.GREEN, 2000, 0, 0, 50, 50, a1 );
         a1.setElement(e3);
 
         e1.start();

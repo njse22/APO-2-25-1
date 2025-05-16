@@ -18,8 +18,8 @@ public class Action1 implements  Runnable {
     public void run() {
         while (suscriber.isAlive()){
             try {
-                suscriber.setY(suscriber.getY() + 2);
                 Thread.sleep(suscriber.getTimer());
+                suscriber.setY(suscriber.getY() + 10);
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
